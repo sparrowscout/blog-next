@@ -1,0 +1,93 @@
+---
+title: 'HLS.js란?'
+date: '2023-08-24'
+excerpt: '✏️ 개념을 잊어버리지 않기 위해!'
+---
+
+# [HLS.js](https://github.com/video-dev/hls.js)
+
+MSE를 통해, HLS 포맷으로 adaptive HTTP streaming을 제공하는 자바스크립트 라이브러리
+
+<br />
+
+# [Media Source Extension(MSE)](https://www.w3.org/TR/media-source-2/)
+
+adpative streaming을 위해 제공되는 브라우저 표준 기술이다.
+
+<br />
+
+## adpative streaming (↔︎ Progressive download)
+
+사용자의 네트워크 상태(bandwidth)에 따라 대응하는 해상도의 동영상을 제공하는 기술이다.
+
+기존 Progressive download방식에서는 한가지 해상도를 선택해 처음부터 끝까지 다운로드해서 영상을 제공하다보니 사용자의 네트워크 상황이 바뀌었을 때 지속적으로 낮은 해상도의 영상을 제공하게되거나, 긴 버퍼링을 겪는 문제가 있었다. 이 문제를 해결하기 위해 나온 방식이 adaptive streaming이다.
+
+adaptive streaming에서는 영상을 다양한 해상도로 인코딩해 segment로 잘게 쪼개서 저장해두고 네트워크 통신을 통해 사용자에게 segment단위로 데이터를 전달한다.
+
+<br />
+
+# [HLS](https://developer.apple.com/streaming/)
+
+adaptive **HTTP** streaming을 위한 Manifest(Playlist) 포맷 중 하나
+
+<br />
+
+### HLS.js가 master playlist를 받으면 → MSE에게 지속적으로 segment를 append
+
+master playlist parsing → <br/>
+media playlist parsing → <br/>
+segment load (예시에서는 .ts) → <br/>
+ts를 MSE가 받을 수 있는 mp4 형식으로 transmux → <br/>
+MSE buffer append → <br/>
+브라우저에서 영상 렌더링 **< 사용자**
+
+<br />
+
+### master playlist (메인 m3u8):
+
+해상도 별 media playlist들의 경로를 갖고있는 데이터 묶음
+
+```text
+#EXTM3U
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2149280,CODECS="mp4a.40.2,avc1.64001f",RESOLUTION=1280x720,NAME="720"
+url_0/193039199_mp4_h264_aac_hd_7.m3u8
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=246440,CODECS="mp4a.40.5,avc1.42000d",RESOLUTION=320x184,NAME="240"
+url_2/193039199_mp4_h264_aac_ld_7.m3u8
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=460560,CODECS="mp4a.40.5,avc1.420016",RESOLUTION=512x288,NAME="380"
+url_4/193039199_mp4_h264_aac_7.m3u8
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=836280,CODECS="mp4a.40.2,avc1.64001f",RESOLUTION=848x480,NAME="480"
+url_6/193039199_mp4_h264_aac_hq_7.m3u8
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=6221600,CODECS="mp4a.40.2,avc1.640028",RESOLUTION=1920x1080,NAME="1080"
+url_8/193039199_mp4_h264_aac_fhd_7.m3u8
+```
+
+<br />
+
+### media playlist (서브 m3u8):
+
+segment들의 경로를 갖고 있는 데이터 묶음
+
+```text
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-PLAYLIST-TYPE:VOD
+#EXT-X-TARGETDURATION:11
+#EXTINF:10.000,
+url_462/193039199_mp4_h264_aac_hd_7.ts
+#EXTINF:10.000,
+url_463/193039199_mp4_h264_aac_hd_7.ts
+#EXTINF:10.000,
+url_464/193039199_mp4_h264_aac_hd_7.ts
+#EXTINF:10.000,
+url_465/193039199_mp4_h264_aac_hd_7.ts
+.
+.
+.
+```
+
+<br />
+
+잘게 쪼개진 segment로 데이터를 제공하기때문에 사용자의 대역폭(bandwidth)에 따라 다음 데이터를 쉽게 교체할 수 있다. 사용자가 컨텐츠를 보는 중에 네트워크 상태가 나빠지면 더 낮은 bandwidth를 가지고 있는 media playlist의 segement들을 요청한다.
+
+📎 [hls.js demo page (playlist examples)](https://hlsjs.video-dev.org/demo/) <br/>
+📎 [웹 기술로 구현하는 Adaptive HTTP Streaming - NHN Cloud](https://meetup.nhncloud.com/posts/131)

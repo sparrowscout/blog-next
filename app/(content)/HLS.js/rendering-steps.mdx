@@ -1,0 +1,53 @@
+---
+title: 영상이 브라우저에 렌더링되기까지 HLS가 하는 일
+date: '2025-01-01'
+excerpt: '✏️ <video> 태그로 HLS.js를 사용했을 때 브라우저에 영상을 렌더링하기 위해서 HLS가 하는 일 정리'
+---
+
+# 전체 흐름
+
+![전체 단계](/img/IMG_1176.PNG)
+
+클라이언트에서 hls 객체를 생성한 후부터 시작해서 브라우저에 렌더링되기까지의 단계를 정리하면 위와 같은 단계로 정리할 수 있습니다.
+
+<br />
+
+# 마스터 플레이리스트 부르기
+
+![Master playlist-Media playlist](/img/IMG_1177.PNG)
+
+HLS.js에서는 main&sub playlist를 master&media playlist라고 부르고 있는데, 부르는 방식은 플레이어마다 다를 수 있습니다.
+
+master playlist에는 해상도와 bandwidth(대역폭)로 구분되어 있는 media playlist 경로들이 담겨있습니다. 담겨있는 media playlist들의 데이터를 정리하는 과정이 master playlist를 파싱하는 과정입니다.(영상, 오디오, 자막도 동일하게 담겨있을 수 있습니다.) hls는 처음에 사용자의 네트워크 상태로 몇 번째 해상도(레벨,트랙)의 media playlist를 재생할지 결정하고 해당 경로로 media playlist를 로드합니다.
+
+<br />
+
+# 미디어 플레이리스트 부르기
+
+![Media playlist-segment URL Load](/img/IMG_1178.PNG)
+
+media playlist에는 segment(\*.m4s)경로들과 segment 각각의 정보들이 담겨있습니다. hls에서는 이 segment들을 순서대로 http 요청을 통해 로드하고, 재생합니다. 영상을 재생하면서 동시에 다음 segment들을 요청하기 위해서 media playlist가 파싱되고 난 후 hls 내에서 반복 함수 tick이 호출됩니다.
+
+<br />
+
+# MSE가 파싱할 수 있게 segment transmux하기
+
+![segment URL Load-transmux](/img/IMG_1179.PNG)
+
+http 요청을 통해 받은 segement들을 MSE가 파싱할 수 있는, 받아들일 수 있는 형태로 변형시키기 위해서 transmux 과정을 거칩니다. stream controller 클래스에서 transmux에 push하고, 완료되면 result를 반환받습니다.
+
+<br />
+
+# transmux 완료한 데이터들을 MSE한테 던져주기
+
+![transmux-bufferAppend](/img/IMG_1180.PNG)
+
+transmux가 완료된 데이터를 source buffer(MSE)에 순서대로 추가합니다. operation queue에 순서대로 들어가서 순서대로 브라우저에 렌더링됩니다.
+
+<br />
+
+# 사용자의 네트워크 bandwidth를 의식하면서 위의 단계를 반복해서 영상을 재생하기!
+
+![tick](/img/IMG_1181.PNG)
+
+사용자가 영상을 재생하는 도중에 네트워크 변동이 생긴다면 새로운 media playlist를 요청해야하고, 네트워크 변동이 없다면 내부에서 매트로놈처럼 움직이는 doTickIdle을 기점으로 `segment 요청` → `segment 로드` → `segment transmux` → `source buffer append` → `다음 segment 요청` → `segment 로드` → ∙∙∙ 의 과정을 반복하면서 브라우저에 영상을 재생시킵니다.

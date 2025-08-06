@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import Clip from '../assets/icons/clip.svg'
+import Clip from '@/assets/icons/clip.svg'
 import Image from 'next/image'
 
 interface CategoryLabelProps {

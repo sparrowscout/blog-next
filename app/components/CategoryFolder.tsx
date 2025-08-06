@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import FolderLabel from '../assets/icons/folder-label.svg'
+import FolderLabel from '@/assets/icons/folder-label.svg'
 
 interface FolderProps {
   categoryName: string
@@ -45,7 +45,8 @@ const FolderContainer = styled.div`
 
 const CategoryCard = styled.div<{ $translateY: number }>`
   @media screen and (max-width: 760px) {
-    transform: ${({ $translateY }) => `translateY(${$translateY}px)`};
+    transform: ${({ $translateY }) =>
+      `translateY(${$translateY}px)`};
     transition: transform 0.3s ease;
     position: absolute;
     width: 100%;

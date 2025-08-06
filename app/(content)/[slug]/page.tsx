@@ -5,6 +5,7 @@ import { remarkMark } from 'remark-mark-highlight'
 import rehypePrism from 'rehype-prism-plus'
 import fs from 'node:fs/promises'
 import BackButton from '@/app/components/BackButton'
+import { mdxComponents } from '@/mdx-components'
 
 export async function generateStaticParams() {
   const posts = await getAllPosts()
@@ -14,9 +15,10 @@ export async function generateStaticParams() {
 export default async function PostPage({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) {
-  const meta = await getPostBySlug(params.slug)
+  const { slug } = await params
+  const meta = await getPostBySlug(slug)
 
   if (!meta) return <div>Not Found</div>
 
@@ -24,6 +26,7 @@ export default async function PostPage({
 
   const { content, frontmatter } = await compileMDX({
     source,
+    components: mdxComponents,
     options: {
       parseFrontmatter: true,
       mdxOptions: {

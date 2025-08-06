@@ -1,12 +1,21 @@
+'use client'
 import styled from 'styled-components'
-import { PostComponentsProps } from '../../types/MDXComponents.Types'
-import React, { DetailedHTMLProps, HTMLAttributes } from 'react'
+import React, {
+  DetailedHTMLProps,
+  HTMLAttributes,
+} from 'react'
+import { PostComponentsProps } from '@/types/MDXComponets.types'
 
 interface LIProps extends PostComponentsProps {
-  props?: DetailedHTMLProps<HTMLAttributes<HTMLLIElement>, HTMLLIElement>
+  props?: DetailedHTMLProps<
+    HTMLAttributes<HTMLLIElement>,
+    HTMLLIElement
+  >
 }
 
-export default function ListItemComponent({ props }: LIProps) {
+export default function ListItemComponent({
+  props,
+}: LIProps) {
   return <ListItem {...props} />
 }
 

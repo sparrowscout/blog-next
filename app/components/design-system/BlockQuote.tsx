@@ -1,13 +1,22 @@
+'use client'
 import styled from 'styled-components'
-import { PostComponentsProps } from '../../types/MDXComponents.Types'
-import React, { DetailedHTMLProps, HTMLAttributes } from 'react'
+import React, {
+  DetailedHTMLProps,
+  HTMLAttributes,
+} from 'react'
+import { PostComponentsProps } from '@/types/MDXComponets.types'
 
 interface BlockQuoteProps extends PostComponentsProps {
-  props?: DetailedHTMLProps<HTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement>
+  props?: DetailedHTMLProps<
+    HTMLAttributes<HTMLQuoteElement>,
+    HTMLQuoteElement
+  >
   // Add any other props you expect to pass to the blockquote
 }
 
-export default function BlockQuoteComponent(props: BlockQuoteProps) {
+export default function BlockQuoteComponent(
+  props: BlockQuoteProps,
+) {
   return <BlockQuote {...props} />
 }
 

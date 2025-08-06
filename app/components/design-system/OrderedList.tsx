@@ -1,8 +1,9 @@
+'use client'
+import { PostComponentsProps } from '@/types/MDXComponets.types'
 import React, {
   DetailedHTMLProps,
   HTMLAttributes,
 } from 'react'
-import { PostComponentsProps } from '../../types/MDXComponents.Types'
 import styled from 'styled-components'
 
 interface OLProps extends PostComponentsProps {

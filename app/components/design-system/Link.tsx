@@ -1,26 +1,40 @@
-import React, { DetailedHTMLProps, HTMLAttributes } from 'react'
-import { PostComponentsProps } from '../../types/MDXComponents.Types'
+'use client'
+import { PostComponentsProps } from '@/types/MDXComponets.types'
+import React, {
+  DetailedHTMLProps,
+  HTMLAttributes,
+} from 'react'
 import styled from 'styled-components'
+import AnchorIcon from '@/assets/icons/anchor.svg'
+import Image from 'next/image'
 
 interface AnchorProps extends PostComponentsProps {
+  href: string
   props?: DetailedHTMLProps<
     HTMLAttributes<HTMLAnchorElement>,
     HTMLAnchorElement
   >
 }
 
-export default function AnchorComponent({ props, children }: AnchorProps) {
-  return <Anchor {...props}>{children}</Anchor>
+export default function AnchorComponent({
+  href,
+  children,
+  props,
+}: AnchorProps) {
+  return (
+    <Anchor {...props} href={href}>
+      {children}
+    </Anchor>
+  )
 }
 
 const Anchor = styled.a`
   color: #8a5cf5;
   background-position: center right;
   background-repeat: no-repeat;
-  background-image:
-    linear-gradient(transparent, transparent), url('/icons/anchor.svg');
+
   background-size: 0.825em;
-  padding-inline-end: 0.9em;
+
   cursor: pointer;
   filter: none;
   transition: opacity 0.15s ease-in-out;

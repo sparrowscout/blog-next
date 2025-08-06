@@ -8,17 +8,21 @@ interface Heading {
   text: string
 }
 
+function extractText(node: any): string {
+  if (node.type === 'text') return node.value
+  if (node.children)
+    return node.children.map(extractText).join('')
+  return ''
+}
+
 export function extractHeadings(
   mdxSource: string,
 ): Heading[] {
   const tree = unified().use(remarkParse).parse(mdxSource)
   const headings: Heading[] = []
-
   visit(tree, 'heading', (node: any) => {
     if (node.depth === 1 || node.depth === 2) {
-      const text = node.children
-        .map((child: any) => child.value)
-        .join('')
+      const text = extractText(node)
       headings.push({ depth: node.depth, text })
     }
   })

@@ -4,7 +4,6 @@ import remarkGfm from 'remark-gfm'
 import { remarkMark } from 'remark-mark-highlight'
 import rehypePrism from 'rehype-prism-plus'
 import fs from 'node:fs/promises'
-import BackButton from '@/app/components/BackButton'
 import { mdxComponents } from '@/mdx-components'
 
 export async function generateStaticParams() {
@@ -42,11 +41,8 @@ export default async function PostPage({
   })
 
   return (
-    <div className="select-text pb-36">
-      <div className="flex items-center px-4 py-2">
-        <BackButton />
-      </div>
-      <article className=" m-5 box-border border-[1px] border-gray-900 bg-white p-4">
+    <div className="select-text pb-36 pt-24 md:px-5">
+      <article className=" box-border border-[1px] border-gray-900 bg-white p-4">
         <h1>
           {String(
             frontmatter?.title ?? meta.title ?? meta.slug,

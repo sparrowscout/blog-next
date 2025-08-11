@@ -1,7 +1,7 @@
+'use client'
 import * as React from 'react'
 import styled from 'styled-components'
 import Clip from '@/assets/icons/clip.svg'
-import Image from 'next/image'
 
 interface CategoryLabelProps {
   categoryName: string
@@ -19,12 +19,7 @@ export default function CategoryLabel({
       >
         {categoryName}
         <ClipIcon>
-          <Image
-            src={Clip}
-            alt="category-clip"
-            fill
-            priority
-          />
+          <Clip width={30} height={30} />
         </ClipIcon>
       </CategoryLabelContainer>
     )

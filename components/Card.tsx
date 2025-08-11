@@ -1,13 +1,13 @@
-import { getRandomNumber2 } from '../../utils/css-utils'
+import { getRandomNumber2 } from '../utils/css-utils'
 import styled from 'styled-components'
 import CardLabels from './CardLabels'
-import { formatSmartDate } from '../../utils/formatDate'
+import { formatSmartDate } from '../utils/formatDate'
 import CategoryLabel from './CategoryLabel'
-import { PostMeta } from '@/lib/posts'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Indexing from './Indexing'
 import { useMediaQuery } from 'react-responsive'
+import { PostMeta } from '@/types/postData.types'
 
 interface CardProps {
   post: PostMeta

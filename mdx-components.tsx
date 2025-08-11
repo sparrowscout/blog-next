@@ -1,5 +1,5 @@
 import type { MDXComponents } from 'mdx/types'
-import { AnchorComponent } from './app/components/design-system'
+import { AnchorComponent } from './components/design-system'
 
 // This file allows you to provide custom React components
 // to be used in MDX files. You can import and use any

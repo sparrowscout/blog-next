@@ -1,18 +1,28 @@
 'use client'
 import Card from './Card'
 import { useMediaQuery } from 'react-responsive'
-import { PostMeta } from '@/lib/posts'
 import { useEffect, useRef, useState } from 'react'
-import { colorArray } from '../enum/categoryColor'
 import styled from 'styled-components'
+import {
+  CategoryList,
+  PostMeta,
+} from '@/types/postData.types'
+import Empty from './Empty'
+import usePostFilterStore, {
+  FilterType,
+} from '@/store/usePostFilterStore'
 
-interface CardStackProps {
-  posts: PostMeta[]
+interface PostCardStackProps {
+  sortedPosts: PostMeta[]
+  categoryList: CategoryList
+  total: number
 }
 
-export default function CardStack({
-  posts,
-}: CardStackProps) {
+export default function PostCardStack({
+  sortedPosts,
+  categoryList,
+  total,
+}: PostCardStackProps) {
   const [currentIdx, setCurrentIdx] = useState(0)
   const [touchList, setTouchList] = useState<number[]>([])
   const [postsGap, setPostsGap] = useState<number>()
@@ -20,31 +30,7 @@ export default function CardStack({
   const isTabletOrMobile = useMediaQuery({
     query: '(max-width: 760px)',
   })
-
-  const categoryList = new Map<string, string>()
-
-  const categoryMap = new Map<string, PostMeta[]>()
-
-  posts.forEach((post, index) => {
-    const category = post.category || 'Uncategorized'
-    if (!categoryList.has(category)) {
-      categoryList.set(category, colorArray[index])
-    }
-
-    if (!categoryMap.has(category)) {
-      categoryMap.set(category, [])
-    }
-
-    categoryMap.get(category)?.push(post)
-  })
-
-  const sortedCategoryKeys = [...categoryMap.keys()].sort()
-
-  const sortedPosts = sortedCategoryKeys.flatMap(
-    (key) => categoryMap.get(key)!,
-  )
-
-  const total = posts.length
+  const { filter } = usePostFilterStore()
 
   const getPostsGap = () => {
     if (!containerRef.current) return
@@ -99,6 +85,10 @@ export default function CardStack({
     }
   }
 
+  if (sortedPosts.length === 0) {
+    return <Empty />
+  }
+
   return (
     <Container
       onWheel={onContainerWheel}
@@ -106,6 +96,7 @@ export default function CardStack({
       onTouchMove={onContainerTouchMove}
       onTouchEnd={onContainerTouchEnd}
       ref={containerRef}
+      $isCategoryFilter={filter === FilterType.CATEGORY}
     >
       {sortedPosts.map((post, idx) => {
         const offset = idx * (postsGap ?? 0) // 카드 간 간격
@@ -120,7 +111,9 @@ export default function CardStack({
             idx={idx}
             translateY={offset}
             isFocus={isFocus}
-            categoryColor={categoryList.get(category)}
+            categoryColor={
+              categoryList.get(category)?.color
+            }
             key={post.slug}
           />
         )
@@ -129,8 +122,11 @@ export default function CardStack({
   )
 }
 
-const Container = styled.div`
-  padding: 350px 16px 200px 16px;
+const Container = styled.div<{
+  $isCategoryFilter: boolean
+}>`
+  padding-top: ${({ $isCategoryFilter }) =>
+    $isCategoryFilter ? '400px' : '300px'};
   max-width: 90%;
   margin: auto;
   touch-action: none;
@@ -138,9 +134,11 @@ const Container = styled.div`
 
   @media screen and (max-width: 760px) {
     padding: 0px 8px;
+    padding-top: ${({ $isCategoryFilter }) =>
+      $isCategoryFilter ? '350px' : '240px'};
+
     overflow: hidden;
     max-width: 100%;
     position: relative;
-    padding-top: 160px;
   }
 `

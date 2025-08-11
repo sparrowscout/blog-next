@@ -3,6 +3,7 @@ import path from 'node:path'
 import matter from 'gray-matter'
 import fg from 'fast-glob'
 import { extractHeadings } from './extractHeadings'
+import { PostMeta } from '@/types/postData.types'
 
 export interface PostFrontmatter {
   title: string
@@ -17,11 +18,6 @@ export interface PostFrontmatter {
 export interface Heading {
   depth: number
   text: string
-}
-
-export interface PostMeta extends PostFrontmatter {
-  slug: string
-  filePath: string
 }
 
 // const BLOG_DIR = path.join(process.cwd(), 'content');

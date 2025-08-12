@@ -1,9 +1,12 @@
-import List from '@/components/List'
+import PostLists from '@/components/PostLists'
+import { getAllPosts } from '@/lib/posts'
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getAllPosts()
+
   return (
     <div className="h-full w-full">
-      <List />
+      <PostLists posts={posts} />
     </div>
   )
 }

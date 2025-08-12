@@ -2,13 +2,15 @@
 import MenuIcon from '@/assets/icons/menu.svg'
 import CloseIcon from '@/assets/icons/close.svg'
 import IconButton from '../common/IconButton'
-import useMenuStore from '@/store/useMenuStore'
+import useNavigationStore from '@/store/useNavigationStore'
 
-export default function MenuButton() {
-  const { isMenuOpen, switchMenuOpen } = useMenuStore()
+export default function NavigationButton() {
+  const { isNavigationOpen, switchNavigationOpen } =
+    useNavigationStore()
+
   return (
-    <IconButton onClick={switchMenuOpen}>
-      {isMenuOpen ? (
+    <IconButton onClick={switchNavigationOpen}>
+      {isNavigationOpen ? (
         <CloseIcon style={{ fill: '#FF01FF' }} />
       ) : (
         <MenuIcon style={{ fill: '#FF01FF' }} />

@@ -1,6 +1,6 @@
 import BackButton from './BackButton'
 import HomeButton from './Homebutton'
-import MenuButton from './MenuButton'
+import NavigationButton from './NavigationButton'
 import SearchButton from './SearchButton'
 import VersionButton from './VersionButton'
 
@@ -13,7 +13,7 @@ export default function Header() {
       </div>
       <div className="flex w-1/2 justify-end gap-2 pl-10">
         <SearchButton />
-        <MenuButton />
+        <NavigationButton />
       </div>
       <HomeButton />
     </div>

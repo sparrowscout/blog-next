@@ -1,8 +1,9 @@
 import { Node } from '@/types/Folder.types'
 import TreeNode, { Group, Name, Row } from './TreeNode'
 import ArrowIcon from '@/assets/icons/left-arrow.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import IconWrapper from './common/IconWrapper'
+import { useSelectedIdStore } from '@/store/useSelectedIdStore'
 
 interface FolderNodeProps {
   node: Node
@@ -16,6 +17,28 @@ export default function FolderNode({
   const [isOpen, setIsOpen] = useState<boolean>(
     node.id === 'posts',
   )
+  const { selectedId } = useSelectedIdStore()
+
+  const findSelectedChild = (children: Node[]) => {
+    return children.find((item) => item.id === selectedId)
+  }
+
+  // 현재 페이지 == 자식 컨텐츠면 isOpen = true
+  const checkSelected = () => {
+    if (
+      node.children &&
+      node.children.length > 0 &&
+      node.id !== 'posts'
+    ) {
+      if (findSelectedChild(node.children)) {
+        setIsOpen(true)
+      }
+    }
+  }
+
+  useEffect(() => {
+    checkSelected()
+  }, [])
 
   return (
     <li role="treeitem" aria-expanded={isOpen}>

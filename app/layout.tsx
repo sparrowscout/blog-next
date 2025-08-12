@@ -3,6 +3,7 @@ import { Noto_Sans_KR } from 'next/font/google'
 import './globals.css'
 import './prism-one-light.css'
 import LayoutClient from '@/components/common/LayoutClient'
+import UrlSelectSync from '@/components/common/UrlSelectSync'
 
 const geistSans = Noto_Sans_KR({
   subsets: ['latin'],
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body
         className={`h-dvh w-full ${geistSans.className}  bg-[repeating-linear-gradient(to_bottom,_#f8f8f8,_#f8f8f8_30px,_#000000_31px)] antialiased`}
       >
+        <UrlSelectSync />
         <LayoutClient>{children}</LayoutClient>
       </body>
     </html>

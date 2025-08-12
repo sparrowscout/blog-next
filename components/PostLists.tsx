@@ -104,7 +104,7 @@ export default function PostLists({
       <div className="absolute left-1/2 top-20 z-10 flex -translate-x-1/2 px-3 py-2">
         <PostFiltering />
       </div>
-      <div className="absolute pt-32">
+      <div className="absolute z-10 pt-32">
         <CategoryFilter categoryList={categoryList} />
       </div>
 

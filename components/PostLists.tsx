@@ -40,11 +40,13 @@ export default function PostLists({
       categoryList.set(category, {
         color: colorArray[index],
         count: 1,
+        content: [post],
       })
     } else if (hasCategory) {
       categoryList.set(category, {
         ...hasCategory,
         count: hasCategory.count + 1,
+        content: [...hasCategory.content, post],
       })
     }
 

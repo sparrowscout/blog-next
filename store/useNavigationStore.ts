@@ -8,7 +8,7 @@ type NavigationState = {
 
 const defaultValue: Node[] = [
   {
-    id: '',
+    id: `/`,
     name: 'home',
     type: 'file',
   },

@@ -41,7 +41,7 @@ export default async function PostPage({
   })
 
   return (
-    <div className="select-text pb-36 pt-24 md:px-5">
+    <div className="h-dvh select-text overflow-scroll pb-36 pt-24 md:px-5">
       <article className=" box-border border-[1px] border-gray-900 bg-white p-4">
         <h1>
           {String(

@@ -4,6 +4,7 @@ import usePostFilterStore, {
 } from '@/store/usePostFilterStore'
 import ArrowIcon from '@/assets/icons/left-arrow.svg'
 import { useState } from 'react'
+import IconWrapper from './common/IconWrapper'
 
 export default function PostFiltering() {
   const { filter, setFilter } = usePostFilterStore()
@@ -26,15 +27,14 @@ export default function PostFiltering() {
         onClick={onClickDropDown}
       >
         {FilterLabel[filter]}
-        <ArrowIcon
-          width={24}
-          height={24}
-          style={{
-            fill: '#ff01ff',
-            rotate: `${openDropDown ? '-90deg' : '90deg'}`,
-            transition: 'rotate 0.3s ease',
-          }}
-        />
+        <IconWrapper size="m">
+          <ArrowIcon
+            style={{
+              rotate: `${openDropDown ? '-90deg' : '90deg'}`,
+              transition: 'rotate 0.3s ease',
+            }}
+          />
+        </IconWrapper>
       </div>
       <div
         className={`absoulte  border-x-[1px] border-black text-center ${openDropDown ? 'h-full' : 'h-0'} overflow-hidden bg-white transition-all duration-300 ease-in-out`}

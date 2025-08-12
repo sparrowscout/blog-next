@@ -1,10 +1,11 @@
 import Image, { StaticImageData } from 'next/image'
-import { ReactNode } from 'react'
+import { ReactElement, SVGProps } from 'react'
+import IconWrapper from './IconWrapper'
 
 interface IconButtonProps {
   iconSrc?: string | StaticImageData
   bgColor?: string
-  children?: ReactNode
+  children?: ReactElement<SVGProps<SVGSVGElement>>
   onClick?: () => void
 }
 
@@ -20,9 +21,7 @@ export default function IconButton({
       className={`relative flex  h-14 w-14  cursor-pointer items-center justify-center border-[1px] border-black ${bgColor}`}
     >
       {children && (
-        <div className="flex h-full w-full items-center justify-center p-2 [&>svg]:h-9 [&>svg]:w-9">
-          {children}
-        </div>
+        <IconWrapper size="xl">{children}</IconWrapper>
       )}
       {iconSrc && (
         <Image

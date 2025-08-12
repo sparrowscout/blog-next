@@ -1,7 +1,6 @@
 'use client'
 import * as React from 'react'
 import styled from 'styled-components'
-import Clip from '@/assets/icons/clip.svg'
 
 interface CategoryLabelProps {
   categoryName: string
@@ -18,9 +17,6 @@ export default function CategoryLabel({
         $categoryColor={categoryColor}
       >
         {categoryName}
-        <ClipIcon>
-          <Clip width={30} height={30} />
-        </ClipIcon>
       </CategoryLabelContainer>
     )
 }
@@ -32,11 +28,6 @@ const ClipIcon = styled.div`
   right: -16px;
   width: 30px;
   height: 30px;
-
-  & > svg {
-    width: 100%;
-    height: 100%;
-  }
 
   @media screen and (max-width: 760px) {
     top: 8px;

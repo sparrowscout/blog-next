@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Noto_Sans_KR } from 'next/font/google'
 import './globals.css'
 import './prism-one-light.css'
@@ -14,6 +14,13 @@ export const metadata: Metadata = {
   title: 'my-cabinet',
   description:
     '공부했던 내용, 작업했던 내용, 트러블 슈팅 기록용 블로그',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 }
 
 export const dynamic = 'error'

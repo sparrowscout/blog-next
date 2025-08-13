@@ -8,7 +8,7 @@ import useBlogTypeStore, {
 import usePostFilterStore, {
   FilterType,
 } from '@/store/usePostFilterStore'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import PostFiltering from './PostFiltering'
 import CategoryFilter from './CategoryFilter'
 import useCategoryListStore from '@/store/useCategoryListStore'
@@ -30,6 +30,13 @@ export default function PostLists({
     useCategoryListStore()
   const [postArray, setPostArray] =
     useState<PostMeta[]>(posts)
+  const [categoryFilterHeight, setCategoryFilterHeight] =
+    useState<number>(0)
+  const [width, setWidth] = useState(0)
+
+  const categoryFilterRef = useRef<null | HTMLDivElement>(
+    null,
+  )
 
   const categoryMap = new Map<string, PostMeta[]>()
 
@@ -99,12 +106,37 @@ export default function PostLists({
     }
   }, [filter, filterCategory])
 
+  useEffect(() => {
+    if (filter !== FilterType.CATEGORY) return
+
+    const el = categoryFilterRef.current
+    if (!el) return
+
+    setCategoryFilterHeight(el.clientHeight)
+  }, [filter, width])
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   return (
     <>
       <div className="absolute left-1/2 top-20 z-[15] flex -translate-x-1/2 px-3 py-2">
         <PostFiltering />
       </div>
-      <div className="absolute z-10 pt-32">
+      <div
+        className="absolute z-10 pt-32"
+        ref={categoryFilterRef}
+      >
         <CategoryFilter categoryList={categoryList} />
       </div>
 
@@ -113,9 +145,13 @@ export default function PostLists({
           total={total}
           sortedPosts={postArray}
           categoryList={categoryList}
+          paddingValue={categoryFilterHeight}
         />
       ) : (
-        <BlogList total={total} sortedPosts={postArray} />
+        <BlogList
+          sortedPosts={postArray}
+          paddingValue={categoryFilterHeight}
+        />
       )}
     </>
   )

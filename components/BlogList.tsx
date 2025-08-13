@@ -6,16 +6,20 @@ import usePostFilterStore, {
   FilterType,
 } from '@/store/usePostFilterStore'
 import BlogPost from './BlogPost'
+import styled from 'styled-components'
 
 interface BlogListProps {
   sortedPosts: PostMeta[]
-  total: number
+  paddingValue: number
 }
 
 export default function BlogList({
   sortedPosts,
+  paddingValue,
 }: BlogListProps) {
   const { filter } = usePostFilterStore()
+  const isCategoryFiltering = filter === FilterType.CATEGORY
+  console.log(isCategoryFiltering, paddingValue)
   if (sortedPosts.length === 0) {
     return (
       <Empty guideText="카테고리 선택을 깜박하신 것 같아요!" />
@@ -24,15 +28,34 @@ export default function BlogList({
 
   return (
     <div className=" h-dvh overflow-y-scroll pl-3 pr-2">
-      <div
-        className={`flex flex-col gap-2 pb-28  ${filter === FilterType.CATEGORY ? 'pt-56' : 'pt-32'} transition-all`}
+      <BlogPostContainer
+        $isCategoryFiltering={isCategoryFiltering}
+        $paddingHeight={paddingValue}
       >
         {sortedPosts.map((post) => {
           return (
             <BlogPost post={post} key={post.filePath} />
           )
         })}
-      </div>
+      </BlogPostContainer>
     </div>
   )
 }
+
+const BlogPostContainer = styled.div<{
+  $paddingHeight: number
+  $isCategoryFiltering: boolean
+}>`
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 2);
+  padding-bottom: calc(var(--spacing) * 28);
+  transition: all;
+  padding-top: ${({
+    $paddingHeight,
+    $isCategoryFiltering,
+  }) =>
+    $isCategoryFiltering
+      ? `calc(var(--spacing) * 2 + ${$paddingHeight}px)`
+      : 'calc(var(--spacing) * 32)'};
+`

@@ -18,7 +18,7 @@ export default function IconButton({
   return (
     <div
       onClick={onClick}
-      className={`relative flex  h-14 w-14  cursor-pointer items-center justify-center border-[1px] border-black ${bgColor}`}
+      className={`relative flex h-14 w-14  cursor-pointer items-center justify-center border-[1px] border-black ${bgColor}`}
     >
       {children && (
         <IconWrapper size="xl">{children}</IconWrapper>

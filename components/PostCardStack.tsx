@@ -86,7 +86,9 @@ export default function PostCardStack({
   }
 
   if (sortedPosts.length === 0) {
-    return <Empty />
+    return (
+      <Empty guideText="카테고리 선택을 깜박하신 것 같아요!" />
+    )
   }
 
   return (

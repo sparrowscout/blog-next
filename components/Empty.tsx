@@ -1,7 +1,11 @@
 import ExitIcon from '@/assets/icons/exit.svg'
 import IconWrapper from './common/IconWrapper'
 
-export default function Empty() {
+interface EmptyProps {
+  guideText: string
+}
+
+export default function Empty({ guideText }: EmptyProps) {
   return (
     <div className="flex h-full w-full items-center justify-center">
       <div className="flex rotate-2 flex-col items-center gap-2 border-[1px] bg-white p-5">
@@ -10,7 +14,7 @@ export default function Empty() {
         </IconWrapper>
 
         <div className="text-center !text-[#ff01ff]">
-          카테고리 선택을 깜박하신 것 같아요!
+          {guideText}
         </div>
       </div>
     </div>

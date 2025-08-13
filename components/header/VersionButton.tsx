@@ -5,8 +5,10 @@ import IconButton from '../common/IconButton'
 import useBlogTypeStore, {
   BlogType,
 } from '@/store/useBlogTypeStore'
+import { usePathname } from 'next/navigation'
 
 export default function VersionButton() {
+  const pathname = usePathname()
   const { blogType, changeBlogType } = useBlogTypeStore()
 
   const onHandleClick = () => {
@@ -16,16 +18,17 @@ export default function VersionButton() {
         : BlogType.DEFAULT,
     )
   }
-  return blogType === BlogType.DEFAULT ? (
-    <IconButton onClick={onHandleClick}>
-      <BlogIcon style={{ fill: '#ff01ff' }} />
-    </IconButton>
-  ) : (
-    <IconButton
-      bgColor="bg-[#ff01ff]"
-      onClick={onHandleClick}
-    >
-      <CabinetIcon style={{ fill: '#fff' }} />
-    </IconButton>
-  )
+  if (pathname === '/')
+    return blogType === BlogType.DEFAULT ? (
+      <IconButton onClick={onHandleClick}>
+        <BlogIcon style={{ fill: '#ff01ff' }} />
+      </IconButton>
+    ) : (
+      <IconButton
+        bgColor="bg-[#ff01ff]"
+        onClick={onHandleClick}
+      >
+        <CabinetIcon style={{ fill: '#fff' }} />
+      </IconButton>
+    )
 }

@@ -16,6 +16,8 @@ export const metadata: Metadata = {
     '공부했던 내용, 작업했던 내용, 트러블 슈팅 기록용 블로그',
 }
 
+export const dynamic = 'error'
+
 export default function RootLayout({
   children,
 }: Readonly<{

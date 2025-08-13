@@ -12,6 +12,19 @@ a {
   color: inherit;
 }
 
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ff01ff;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 html,
 body {
   margin: 0;
@@ -25,7 +38,6 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-
   overflow: hidden;
 
   /* Headings */

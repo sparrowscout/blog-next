@@ -82,7 +82,7 @@ export default function SearchBox() {
       {q.length > 0 && results.length === 0 && (
         <Empty guideText="검색 결과가 없어요!" />
       )}
-      <div className="h-dvh overflow-y-scroll pt-20">
+      <div className="h-dvh overflow-y-scroll pl-3 pr-2 pt-20">
         <ul className="space-y-2">
           {results.map((r, index) => (
             <li key={index} className="last:pb-30">

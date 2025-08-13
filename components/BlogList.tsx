@@ -23,7 +23,7 @@ export default function BlogList({
   }
 
   return (
-    <div className=" h-dvh overflow-y-scroll">
+    <div className=" h-dvh overflow-y-scroll pl-3 pr-2">
       <div
         className={`flex flex-col gap-2 pb-28  ${filter === FilterType.CATEGORY ? 'pt-56' : 'pt-32'} transition-all`}
       >

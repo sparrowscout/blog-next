@@ -101,7 +101,7 @@ export default function PostLists({
 
   return (
     <>
-      <div className="absolute left-1/2 top-20 z-10 flex -translate-x-1/2 px-3 py-2">
+      <div className="absolute left-1/2 top-20 z-[15] flex -translate-x-1/2 px-3 py-2">
         <PostFiltering />
       </div>
       <div className="absolute z-10 pt-32">
@@ -115,11 +115,7 @@ export default function PostLists({
           categoryList={categoryList}
         />
       ) : (
-        <BlogList
-          total={total}
-          sortedPosts={postArray}
-          categoryList={categoryList}
-        />
+        <BlogList total={total} sortedPosts={postArray} />
       )}
     </>
   )

@@ -3,16 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/build-search-index.mjs",
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "next build &&  next export",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md,mdx}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md,mdx}\"",
+    "prebuild": "node scripts/build-search-index.mjs",
+    "deploy": "gh-pages -d out -b gh-pages && echo '.nojekyll' > out/.nojekyll"
   },
   "dependencies": {
     "@next/mdx": "^15.4.3",
     "@svgr/webpack": "^8.1.0",
     "fast-glob": "^3.3.3",
+    "fuse.js": "^7.1.0",
+    "gh-pages": "^6.3.0",
     "gray-matter": "^4.0.3",
     "next": "15.4.3",
     "next-mdx-remote": "^5.0.0",

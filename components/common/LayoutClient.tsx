@@ -4,6 +4,8 @@ import React from 'react'
 import Header from '@/components/header'
 import Navigation from '@/components/Navigation'
 import useNavigationStore from '@/store/useNavigationStore'
+import useSearchStore from '@/store/useSearchStore'
+import SearchBox from '../SearchBox'
 
 export default function LayoutClient({
   children,
@@ -11,10 +13,12 @@ export default function LayoutClient({
   children: React.ReactNode
 }) {
   const { isNavigationOpen } = useNavigationStore()
+  const { isSearching } = useSearchStore()
 
   return (
     <>
       <Header />
+      {isSearching && <SearchBox />}
       {isNavigationOpen && <Navigation />}
       {children}
     </>

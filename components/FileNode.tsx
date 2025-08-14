@@ -1,5 +1,5 @@
 import { Node } from '@/types/Folder.types'
-import { CaretPlaceholder, Name, Row } from './TreeNode'
+import { Name, Row } from './TreeNode'
 import Link from 'next/link'
 import useNavigationStore from '@/store/useNavigationStore'
 import TreeIconCaret from './TreeIconCaret'
@@ -26,6 +26,7 @@ export default function FileNode({
     <Link href={node.id}>
       <li
         role="treeitem"
+        aria-selected={isSelected}
         className={`hover:[&_span]:!text-[#ff01ff] active:[&_span]:!text-[#ff01ff] ${isSelected ? '[&_span]:!text-[#ff01ff]' : ''}`}
       >
         <Row $depth={depth} onClick={onClickFileNode}>

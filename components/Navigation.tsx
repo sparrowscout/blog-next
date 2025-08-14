@@ -8,8 +8,7 @@ import TreeView from './TreeView'
 
 export default function Navigation() {
   const { categoryList } = useCategoryListStore()
-  const { setNavigationTree, navigationTree } =
-    useNavigationStore()
+  const { setNavigationTree } = useNavigationStore()
 
   const builtTree: Node[] = useMemo(() => {
     if (!categoryList || categoryList.size === 0) return []
@@ -43,10 +42,6 @@ export default function Navigation() {
     setNavigationTree(builtTree)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [builtTree])
-
-  useEffect(() => {
-    console.log(navigationTree)
-  }, [navigationTree])
 
   return (
     <div

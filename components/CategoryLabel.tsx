@@ -21,18 +21,19 @@ export default function CategoryLabel({
     )
 }
 
-const ClipIcon = styled.div`
-  position: absolute;
-  rotate: 120deg;
-  top: 18px;
-  right: -16px;
-  width: 30px;
-  height: 30px;
+// note 안 쓰는게 더 깔끔한 것 같긴한데 ... 살리고 싶을 때가 올 거 같아서 킵
+// const ClipIcon = styled.div`
+//   position: absolute;
+//   rotate: 120deg;
+//   top: 18px;
+//   right: -16px;
+//   width: 30px;
+//   height: 30px;
 
-  @media screen and (max-width: 760px) {
-    top: 8px;
-  }
-`
+//   @media screen and (max-width: 760px) {
+//     top: 8px;
+//   }
+// `
 
 const CategoryLabelContainer = styled.div<{
   $categoryColor: string

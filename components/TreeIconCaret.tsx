@@ -11,7 +11,6 @@ interface TreeIconCaretProps {
 export default function TreeIconCaret({
   id,
 }: TreeIconCaretProps) {
-  console.log(id)
   const iconMap: Map<
     string,
     ReactElement<SVGProps<SVGSVGElement>>
@@ -21,8 +20,6 @@ export default function TreeIconCaret({
     .set('posts', <PostsIcon />)
 
   const icon = iconMap.get(id)
-
-  console.log(icon)
 
   if (icon)
     return <IconWrapper size="s">{icon}</IconWrapper>

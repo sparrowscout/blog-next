@@ -38,10 +38,15 @@ export default function FolderNode({
 
   useEffect(() => {
     checkSelected()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
-    <li role="treeitem" aria-expanded={isOpen}>
+    <li
+      role="treeitem"
+      aria-expanded={isOpen}
+      aria-selected={node.id === selectedId}
+    >
       <Row
         $depth={depth}
         className="cursor-pointer"

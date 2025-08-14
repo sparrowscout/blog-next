@@ -18,7 +18,6 @@ export default function OrderedListComponent({
   props,
   children,
 }: OLProps) {
-  console.log(children)
   return <OrderedList {...props}>{children}</OrderedList>
 }
 

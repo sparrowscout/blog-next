@@ -26,6 +26,7 @@ export default function CardLabels({
       rotation: getRandomNumber(5, -5),
       categoryColor,
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (labelConfig)

@@ -47,10 +47,6 @@ export default function SearchBox() {
     setResults(fuse.search(q))
   }, [q, fuse])
 
-  useEffect(() => {
-    console.log(results)
-  }, [results])
-
   return (
     <div className="relative z-50 box-border h-dvh w-full space-y-2  bg-white">
       <div className="fixed  top-3 box-border flex w-full justify-between gap-2 px-3">

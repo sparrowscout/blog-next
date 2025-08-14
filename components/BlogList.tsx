@@ -19,7 +19,7 @@ export default function BlogList({
 }: BlogListProps) {
   const { filter } = usePostFilterStore()
   const isCategoryFiltering = filter === FilterType.CATEGORY
-  console.log(isCategoryFiltering, paddingValue)
+
   if (sortedPosts.length === 0) {
     return (
       <Notice noticeType={NoticeText.FILTER_RESULT_EMPTY} />

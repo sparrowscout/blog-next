@@ -104,6 +104,7 @@ export default function PostLists({
     } else if (filter === FilterType.CATEGORY) {
       setPostArray(categoryFilterdPostArray)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, filterCategory])
 
   useEffect(() => {

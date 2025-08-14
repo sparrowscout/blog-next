@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import IconButton from '../common/IconButton'
 import SearchIcon from '@/assets/icons/search.svg'
 import useSearchStore from '@/store/useSearchStore'

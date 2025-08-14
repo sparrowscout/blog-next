@@ -5,8 +5,6 @@ import React, {
   HTMLAttributes,
 } from 'react'
 import styled from 'styled-components'
-import AnchorIcon from '@/assets/icons/anchor.svg'
-import Image from 'next/image'
 
 interface AnchorProps extends PostComponentsProps {
   href: string

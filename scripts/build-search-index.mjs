@@ -34,7 +34,6 @@ for (const file of files) {
       ? Date.parse(rawDate) // 숫자 타임스탬프 (정렬용)
       : null
 
-  console.log(data)
   const rel = path
     .relative(CONTENT_DIR, file)
     .replace(/\\/g, '/') // 윈도우 대비

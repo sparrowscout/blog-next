@@ -17,6 +17,7 @@ export default function UrlSelectSync() {
       setSelectedId(id)
       prevKey.current = id
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
   return null

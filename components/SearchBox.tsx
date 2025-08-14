@@ -56,7 +56,8 @@ export default function SearchBox() {
             id="search input"
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="검색어를 입력해주세요"
+            placeholder="검색어를 입력해주세요 ~"
+            autoFocus
           />
           {q && (
             <button

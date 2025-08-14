@@ -1,0 +1,16 @@
+{
+  "New Blog Post (MDX)": {
+    "prefix": "newmdx",
+    "body": [
+      "---",
+      "title: \"$1\"",
+      "date: \"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}\"",
+      "excerpt: \"\"",
+      "---",
+      "",
+      "$2",
+      "",
+    ],
+    "description": "Create a new blog post with frontmatter and TLDR marker",
+  },
+}

@@ -23,4 +23,10 @@ export default function TreeIconCaret({
 
   if (icon)
     return <IconWrapper size="s">{icon}</IconWrapper>
+  else
+    return (
+      <div className="flex w-4 justify-end !text-[#ff01ff]">
+        ᛫
+      </div>
+    )
 }

@@ -43,8 +43,8 @@ export default async function PostPage({
   })
 
   return (
-    <ClientScrollContainer className="h-dvh max-w-[1440px] select-text overflow-scroll px-3 pb-36 pt-24">
-      <article className=" box-border border-[1px] border-gray-900 bg-white p-4">
+    <ClientScrollContainer className="h-dvh  select-text overflow-scroll px-3 pb-36 pt-24">
+      <article className="m-auto box-border max-w-[1280px] border-[1px] border-gray-900 bg-white p-4">
         <h1>
           {String(
             frontmatter?.title ?? meta.title ?? meta.slug,

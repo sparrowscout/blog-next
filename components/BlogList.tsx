@@ -62,4 +62,6 @@ const BlogPostContainer = styled.div<{
     $isCategoryFiltering
       ? `calc(var(--spacing) * 2 + ${$paddingHeight}px)`
       : 'calc(var(--spacing) * 32)'};
+  max-width: 1280px;
+  margin: auto;
 `

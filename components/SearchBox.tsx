@@ -51,7 +51,10 @@ export default function SearchBox() {
 
   return (
     <div className="relative z-50 box-border h-dvh w-full space-y-2 overflow-hidden  bg-white">
-      <div className="fixed  top-3 box-border flex w-full justify-between gap-2 px-3">
+      <div
+        className="fixed  top-3 m-auto box-border flex w-full max-w-[1280px] justify-between gap-2 px-3 xl:left-1/2 xl:-translate-x-1/2
+      "
+      >
         <div className="relative w-full">
           <input
             className="box-border h-14 w-full  border-[1px] border-black bg-white px-3 !text-[#ff01ff] outline-none "
@@ -85,9 +88,9 @@ export default function SearchBox() {
         />
       )}
       <div
-        className={`h-dvh overflow-y-scroll px-3 pt-20 ${isScrollbarOverlay ? '' : 'pr-2'}`}
+        className={` h-dvh  overflow-y-scroll px-3 pt-20 ${isScrollbarOverlay ? '' : 'pr-2'}`}
       >
-        <ul className="space-y-2">
+        <ul className="m-auto max-w-[1280px] space-y-2">
           {results.map((r, index) => (
             <li key={index} className="last:pb-96">
               <BlogPost post={r.item} />

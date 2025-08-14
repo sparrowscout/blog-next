@@ -5,12 +5,12 @@
   "scripts": {
     "predev": "node scripts/build-search-index.mjs",
     "dev": "next dev --turbopack",
-    "build": "next build &&  next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"**/*.{ts,tsx,md,mdx}\"",
     "prebuild": "node scripts/build-search-index.mjs",
-    "deploy": "gh-pages -d out -b gh-pages && echo '.nojekyll' > out/.nojekyll"
+    "deploy": "touch out/.nojekyll && gh-pages -d out -b gh-pages"
   },
   "dependencies": {
     "@next/mdx": "^15.4.3",

@@ -8,6 +8,7 @@ import SearchButton from './header/SearchButton'
 import IconWrapper from './common/IconWrapper'
 import DeleteIcon from '@/assets/icons/close.svg'
 import Notice, { NoticeText } from './common/Notice'
+import { useIsIOSChrome } from '@/hooks/useIsIOSChrome'
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 export default function SearchBox() {
@@ -16,6 +17,7 @@ export default function SearchBox() {
   const [results, setResults] = useState<
     FuseResult<PostMeta>[]
   >([])
+  const isScrollbarOverlay = useIsIOSChrome()
 
   useEffect(() => {
     // 절대경로 + basePath를 안전하게 붙여서 GH Pages에서도 동작
@@ -48,7 +50,7 @@ export default function SearchBox() {
   }, [q, fuse])
 
   return (
-    <div className="relative z-50 box-border h-dvh w-full space-y-2  bg-white">
+    <div className="relative z-50 box-border h-dvh w-full space-y-2 overflow-hidden  bg-white">
       <div className="fixed  top-3 box-border flex w-full justify-between gap-2 px-3">
         <div className="relative w-full">
           <input
@@ -82,10 +84,12 @@ export default function SearchBox() {
           noticeType={NoticeText.SEARCH_RESULT_EMPTY}
         />
       )}
-      <div className="h-dvh overflow-y-scroll pl-3 pr-2 pt-20">
+      <div
+        className={`h-dvh overflow-y-scroll px-3 pt-20 ${isScrollbarOverlay ? '' : 'pr-2'}`}
+      >
         <ul className="space-y-2">
           {results.map((r, index) => (
-            <li key={index} className="last:pb-30">
+            <li key={index} className="last:pb-96">
               <BlogPost post={r.item} />
             </li>
           ))}

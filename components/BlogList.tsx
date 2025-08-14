@@ -7,6 +7,7 @@ import usePostFilterStore, {
 import BlogPost from './BlogPost'
 import styled from 'styled-components'
 import Notice, { NoticeText } from './common/Notice'
+import { useIsIOSChrome } from '@/hooks/useIsIOSChrome'
 
 interface BlogListProps {
   sortedPosts: PostMeta[]
@@ -19,6 +20,7 @@ export default function BlogList({
 }: BlogListProps) {
   const { filter } = usePostFilterStore()
   const isCategoryFiltering = filter === FilterType.CATEGORY
+  const isScrollbarOverlay = useIsIOSChrome()
 
   if (sortedPosts.length === 0) {
     return (
@@ -27,7 +29,9 @@ export default function BlogList({
   }
 
   return (
-    <div className=" h-dvh overflow-y-scroll pl-3 pr-2">
+    <div
+      className={`h-dvh overflow-y-scroll px-3 ${isScrollbarOverlay ? '' : 'pr-2'}`}
+    >
       <BlogPostContainer
         $isCategoryFiltering={isCategoryFiltering}
         $paddingHeight={paddingValue}

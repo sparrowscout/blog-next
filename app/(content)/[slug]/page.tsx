@@ -5,6 +5,7 @@ import { remarkMark } from 'remark-mark-highlight'
 import rehypePrism from 'rehype-prism-plus'
 import fs from 'node:fs/promises'
 import { mdxComponents } from '@/mdx-components'
+import ClientScrollContainer from '@/components/common/ClientScrollContainer'
 
 export async function generateStaticParams() {
   const posts = await getAllPosts()
@@ -17,6 +18,7 @@ export default async function PostPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
+
   const meta = await getPostBySlug(slug)
 
   if (!meta) return <div>Not Found</div>
@@ -41,7 +43,7 @@ export default async function PostPage({
   })
 
   return (
-    <div className="h-dvh select-text overflow-scroll pb-36 pl-3 pr-2 pt-24 md:px-5">
+    <ClientScrollContainer className="h-dvh max-w-[1440px] select-text overflow-scroll px-3 pb-36 pt-24">
       <article className=" box-border border-[1px] border-gray-900 bg-white p-4">
         <h1>
           {String(
@@ -50,6 +52,6 @@ export default async function PostPage({
         </h1>
         {content}
       </article>
-    </div>
+    </ClientScrollContainer>
   )
 }

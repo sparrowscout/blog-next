@@ -1,12 +1,12 @@
 'use client'
 
 import { PostMeta } from '@/types/postData.types'
-import Empty from './Empty'
 import usePostFilterStore, {
   FilterType,
 } from '@/store/usePostFilterStore'
 import BlogPost from './BlogPost'
 import styled from 'styled-components'
+import Notice, { NoticeText } from './common/Notice'
 
 interface BlogListProps {
   sortedPosts: PostMeta[]
@@ -22,7 +22,7 @@ export default function BlogList({
   console.log(isCategoryFiltering, paddingValue)
   if (sortedPosts.length === 0) {
     return (
-      <Empty guideText="카테고리 선택을 깜박하신 것 같아요!" />
+      <Notice noticeType={NoticeText.FILTER_RESULT_EMPTY} />
     )
   }
 

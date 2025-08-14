@@ -1,12 +1,13 @@
 'use client'
+
 import { useEffect, useMemo, useState } from 'react'
 import Fuse, { FuseResult } from 'fuse.js'
 import BlogPost from './BlogPost'
 import { PostMeta } from '@/types/postData.types'
-import Empty from './Empty'
 import SearchButton from './header/SearchButton'
 import IconWrapper from './common/IconWrapper'
 import DeleteIcon from '@/assets/icons/close.svg'
+import Notice, { NoticeText } from './common/Notice'
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 export default function SearchBox() {
@@ -80,7 +81,9 @@ export default function SearchBox() {
       </div>
 
       {q.length > 0 && results.length === 0 && (
-        <Empty guideText="검색 결과가 없어요!" />
+        <Notice
+          noticeType={NoticeText.SEARCH_RESULT_EMPTY}
+        />
       )}
       <div className="h-dvh overflow-y-scroll pl-3 pr-2 pt-20">
         <ul className="space-y-2">

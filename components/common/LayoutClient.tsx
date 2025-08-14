@@ -17,8 +17,7 @@ export default function LayoutClient({
 
   return (
     <>
-      <Header />
-      {isSearching && <SearchBox />}
+      {isSearching ? <SearchBox /> : <Header />}
       {isNavigationOpen && <Navigation />}
       {children}
     </>

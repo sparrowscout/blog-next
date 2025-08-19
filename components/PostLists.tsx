@@ -86,8 +86,6 @@ export default function PostLists({
       new Date(b.date).getTime(),
   )
 
-  const total = posts.length
-
   const categoryFilterdPostArray = [...sortedPosts].filter(
     (post) => {
       return filterCategory?.has(
@@ -143,7 +141,6 @@ export default function PostLists({
 
       {blogType === BlogType.CABINET ? (
         <PostCardStack
-          total={total}
           sortedPosts={postArray}
           categoryList={categoryList}
           paddingValue={categoryFilterHeight}

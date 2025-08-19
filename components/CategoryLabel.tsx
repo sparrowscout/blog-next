@@ -21,33 +21,19 @@ export default function CategoryLabel({
     )
 }
 
-// note 안 쓰는게 더 깔끔한 것 같긴한데 ... 살리고 싶을 때가 올 거 같아서 킵
-// const ClipIcon = styled.div`
-//   position: absolute;
-//   rotate: 120deg;
-//   top: 18px;
-//   right: -16px;
-//   width: 30px;
-//   height: 30px;
-
-//   @media screen and (max-width: 760px) {
-//     top: 8px;
-//   }
-// `
-
 const CategoryLabelContainer = styled.div<{
   $categoryColor: string
 }>`
   position: absolute;
-  z-index: 1;
+  z-index: -99;
   top: -60px;
-  left: -140px;
+  left: -40px;
   color: black;
-  padding: 24px;
-  padding-left: 140px;
+  padding: 16px 40px;
+  padding-bottom: 50px;
   min-width: 80px;
   font-weight: 700;
-  rotate: -3deg;
+  rotate: 0deg;
   background-color: ${({ $categoryColor }) =>
     $categoryColor};
   text-align: center;
@@ -55,8 +41,8 @@ const CategoryLabelContainer = styled.div<{
   border: 1px solid black;
 
   @media screen and (max-width: 760px) {
-    padding: 16px 24px 16px 40px;
-    top: -47px;
+    padding: 16px 24px 40px 40px;
+    top: -56px;
     left: -24px;
   }
 `

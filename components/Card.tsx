@@ -76,27 +76,13 @@ const CardWrapper = styled.div<{
   position: relative;
   width: 100%;
   height: 100%;
-
   will-change: transform;
   transition:
     transform 0.1s ease,
     rotate 0.1s ease-out;
-  rotate: ${(props) => props.$rotation}deg;
-  transform: translateY(0);
-
-  @media screen and (min-width: 761px) {
-    &:hover {
-      transform: translateY(-100px);
-      rotate: 0deg;
-    }
-  }
-
-  @media screen and (max-width: 760px) {
-    transform: ${({ $translateY }) =>
-      `translateY(${$translateY}px)`};
-    rotate: ${(props) => props.$rotation}deg;
-    transition: transform 0.3s ease rotate 0.3 ease;
-  }
+  rotate: ${({ $rotation }) => `${$rotation}deg`};
+  transform: ${({ $translateY }) =>
+    `translateY(${$translateY}px)`};
 `
 
 const DateTag = styled.div`
@@ -115,20 +101,18 @@ const DateTag = styled.div`
 `
 
 const CardContent = styled.div`
-  position: relative;
   background: #fff;
   border: 1px solid black;
   height: 200px;
-  /* filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25)); */
-  position: relative;
+  width: 100%;
+  position: absolute;
   padding: 60px 20px 8px 20px;
   color: #5d5d5d;
   z-index: 0;
   overflow: hidden;
   box-sizing: border-box;
+
   @media screen and (max-width: 760px) {
     padding: 32px 16px;
-    width: 100%;
-    position: absolute;
   }
 `

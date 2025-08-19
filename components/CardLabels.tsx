@@ -54,7 +54,7 @@ const CardTag = styled.div<{
   transform: ${({ $yPosition }) =>
     `translateX(${$yPosition}%)`};
   transition: transform 0.2s ease;
-  top: -8px;
+  top: -12px;
   min-width: 100px;
   text-align: center;
   padding: 16px;
@@ -65,26 +65,18 @@ const CardTag = styled.div<{
   display: flex;
   align-items: center;
   justify-content: center;
-  /* box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4); */
   font-weight: 500;
 
-  @media screen and (min-width: 761px) {
-    .stack-card:hover & {
+  ${({ $isFocusing }) =>
+    $isFocusing &&
+    css`
       rotate: 0deg;
-      transform: translateX(10px);
-    }
-  }
+      transform: translateX(12px);
+    `}
 
   @media screen and (max-width: 760px) {
     padding: 8px;
     height: 33px;
-
-    ${({ $isFocusing }) =>
-      $isFocusing &&
-      css`
-        rotate: 0deg;
-        transform: translateX(-5px);
-      `}
   }
 `
 

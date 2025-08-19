@@ -52,7 +52,7 @@ export default function SearchBox() {
   return (
     <div className="relative z-50 box-border h-dvh w-full space-y-2 overflow-hidden  bg-white">
       <div
-        className="fixed  top-3 m-auto box-border flex w-full max-w-[1280px] justify-between gap-2 px-3 xl:left-1/2 xl:-translate-x-1/2
+        className="fixed top-3 m-auto box-border flex w-full max-w-[1280px] justify-between gap-2 px-3 xl:left-1/2  xl:-translate-x-1/2 xl:px-0
       "
       >
         <div className="relative w-full">

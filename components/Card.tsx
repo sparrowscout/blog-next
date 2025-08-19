@@ -6,7 +6,6 @@ import CategoryLabel from './CategoryLabel'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Indexing from './Indexing'
-import { useMediaQuery } from 'react-responsive'
 import { PostMeta } from '@/types/postData.types'
 
 interface CardProps {
@@ -25,36 +24,20 @@ export default function Card({
   categoryColor,
 }: CardProps) {
   const [rotation, setRotation] = useState(0)
-  const [isFocusing, setIsFocusig] =
-    useState<boolean>(false)
-  const isMobile = useMediaQuery({
-    query: '(max-width: 360px)',
-  })
 
   useEffect(() => {
     setRotation(getRandomNumber2(3, -3))
   }, [])
-
-  const onCardHover = () => {
-    if (isMobile) return
-    setIsFocusig(true)
-  }
-
-  const onCardLeave = () => {
-    setIsFocusig(false)
-  }
 
   return (
     <CardContainer>
       <Link href={`/${post.slug}`}>
         <CardWrapper
           $rotation={isFocus ? 0 : rotation}
-          $translateY={
-            isFocus ? translateY - 100 : translateY
-          }
+          $translateY={translateY}
           className="stack-card"
         >
-          {isFocusing || isFocus ? (
+          {isFocus ? (
             <CategoryLabel
               categoryName={post.category ?? ''}
               categoryColor={categoryColor || 'transparent'}
@@ -66,13 +49,7 @@ export default function Card({
             isFocusing={isFocus}
             categoryColor={categoryColor || 'transparent'}
           />
-
-          <CardContent
-            key={idx}
-            data-index={idx}
-            onMouseEnter={onCardHover}
-            onMouseLeave={onCardLeave}
-          >
+          <CardContent key={idx} data-index={idx}>
             <div className="pb-2">{post.excerpt}</div>
             <Indexing heading={post.headings} />
           </CardContent>

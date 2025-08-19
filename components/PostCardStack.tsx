@@ -1,7 +1,6 @@
 'use client'
 
 import Card from './Card'
-import { useMediaQuery } from 'react-responsive'
 import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import {
@@ -12,6 +11,7 @@ import usePostFilterStore, {
   FilterType,
 } from '@/store/usePostFilterStore'
 import Notice, { NoticeText } from './common/Notice'
+import { checkPC } from '@/utils/os'
 
 interface PostCardStackProps {
   sortedPosts: PostMeta[]
@@ -29,11 +29,8 @@ export default function PostCardStack({
   const [currentIdx, setCurrentIdx] = useState(0)
   const [touchList, setTouchList] = useState<number[]>([])
   const containerRef = useRef<null | HTMLDivElement>(null)
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+  const isPC = checkPC()
 
-  const isTabletOrMobile = useMediaQuery({
-    query: '(max-width: 760px)',
-  })
   const { filter } = usePostFilterStore()
 
   useEffect(() => {
@@ -97,6 +94,8 @@ export default function PostCardStack({
   const onContainerTouchStart = (
     event: React.TouchEvent,
   ) => {
+    if (isPC) return
+
     const { touches } = event
     setTouchList([touches[0].clientY])
   }
@@ -114,17 +113,11 @@ export default function PostCardStack({
 
     if (Math.abs(distance) > dragThreshold) {
       if (distance < 0) {
-        setCurrentIdx((prev) => {
-          const next = Math.min(prev + 1, total - 1)
-          if (next !== prev) setIndexAndScroll(next, 'down')
-          return next
-        })
+        setCurrentIdx((prev) =>
+          Math.max(prev - 1, total - 1),
+        )
       } else if (distance > 0) {
-        setCurrentIdx((prev) => {
-          const next = Math.max(prev - 1, 0)
-          if (next !== prev) setIndexAndScroll(next, 'up')
-          return next
-        })
+        setCurrentIdx((prev) => Math.max(prev - 1, 0))
       }
       setTouchList([])
     }
@@ -135,19 +128,18 @@ export default function PostCardStack({
   }
 
   const onContainerWheel = (e: React.WheelEvent) => {
+    if (isPC) return
+
     if (e.deltaY > 0) {
-      setCurrentIdx((prev) => {
-        const next = Math.min(prev + 1, total - 1)
-        if (next !== prev) setIndexAndScroll(next, 'down')
-        return next
-      })
+      setCurrentIdx((prev) => Math.max(prev - 1, total - 1))
     } else {
-      setCurrentIdx((prev) => {
-        const next = Math.max(prev - 1, 0)
-        if (next !== prev) setIndexAndScroll(next, 'up')
-        return next
-      })
+      setCurrentIdx((prev) => Math.max(prev - 1, 0))
     }
+  }
+
+  const onMouseOverCard = (index: number) => {
+    if (!isPC) return
+    setCurrentIdx(index)
   }
 
   if (sortedPosts.length === 0) {
@@ -167,22 +159,18 @@ export default function PostCardStack({
       $paddingHeight={paddingValue}
     >
       {sortedPosts.map((post, idx) => {
+        // 자리값 = index * cardgap
+        // 현재 인덱스보다 얼마나 떨어져있는지? currentindex - index
+        // 맨 처음을 0으로 잡고 index + cardgap + (currentIndex-index)
+        // 현재 카드의 Offset = 0
         const offset = idx * CARD_GAP
-        const isFocus = isTabletOrMobile
-          ? idx === currentIdx
-          : false
+        const isFocus = idx === currentIdx
         const category = post.category || 'Uncategorized'
 
         return (
           <div
             key={post.slug}
-            style={{
-              // (선택) 스냅 대상
-              scrollSnapAlign: 'start',
-            }}
-            ref={(el) => {
-              cardRefs.current[idx] = el
-            }}
+            onMouseOver={() => onMouseOverCard(idx)}
           >
             <Card
               post={post}
@@ -228,8 +216,6 @@ const Container = styled.div<{
 
     max-width: 100%;
     position: relative;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    touch-action: pan-y;
+    overflow: hidden;
   }
 `

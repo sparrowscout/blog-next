@@ -6,15 +6,26 @@ type NavigationState = {
   navigationTree: Node[]
 }
 
+export enum DefaultCategory {
+  HOME = 'home',
+  PROFILE = 'profile',
+  CONTACT = 'contact',
+}
+
 const defaultValue: Node[] = [
   {
     id: `/`,
-    name: 'home',
+    name: DefaultCategory.HOME,
     type: 'file',
   },
   {
     id: 'profile',
-    name: 'profile',
+    name: DefaultCategory.PROFILE,
+    type: 'file',
+  },
+  {
+    id: 'contact',
+    name: DefaultCategory.CONTACT,
     type: 'file',
   },
 ]

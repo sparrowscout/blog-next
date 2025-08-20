@@ -2,24 +2,25 @@ import { ReactElement, SVGProps } from 'react'
 import IconWrapper from './common/IconWrapper'
 import HomeIcon from '@/assets/icons/home.svg'
 import ProfileIcon from '@/assets/icons/profile.svg'
-import PostsIcon from '@/assets/icons/posts.svg'
+import ContactIcon from '@/assets/icons/contact.svg'
+import { DefaultCategory } from '@/store/useNavigationStore'
 
 interface TreeIconCaretProps {
-  id: string
+  id: DefaultCategory | string
 }
 
 export default function TreeIconCaret({
   id,
 }: TreeIconCaretProps) {
   const iconMap: Map<
-    string,
+    DefaultCategory,
     ReactElement<SVGProps<SVGSVGElement>>
   > = new Map()
-    .set('home', <HomeIcon />)
-    .set('profile', <ProfileIcon />)
-    .set('posts', <PostsIcon />)
+    .set(DefaultCategory.HOME, <HomeIcon />)
+    .set(DefaultCategory.PROFILE, <ProfileIcon />)
+    .set(DefaultCategory.CONTACT, <ContactIcon />)
 
-  const icon = iconMap.get(id)
+  const icon = iconMap.get(id as DefaultCategory)
 
   if (icon)
     return <IconWrapper size="s">{icon}</IconWrapper>

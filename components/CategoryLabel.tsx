@@ -32,7 +32,6 @@ const CategoryLabelContainer = styled.div<{
   padding: 16px 40px;
   padding-bottom: 50px;
   min-width: 80px;
-  font-weight: 700;
   rotate: 0deg;
   background-color: ${({ $categoryColor }) =>
     $categoryColor};

@@ -21,6 +21,7 @@ export default function IconWrapper({
   return cloneElement(children, {
     width: sizeMap[size],
     height: sizeMap[size],
+    className: `active:!fill-white`,
     style: {
       fill: color,
       ...(children.props.style || {}),

@@ -2,6 +2,7 @@ import usePostFilterStore, {
   FilterType,
 } from '@/store/usePostFilterStore'
 import { CategoryList } from '@/types/postData.types'
+import Tag from './common/Tag'
 interface CategoryFilterProps {
   categoryList: CategoryList
 }
@@ -35,15 +36,22 @@ export default function CategoryFilter({
           ([category, { color, count }]) => {
             return (
               <div
-                key={category}
-                style={{ ['--chip' as string]: color }}
-                className={`border-[1px] border-black ${filterCategory?.has(category) ? 'bg-[var(--chip)]' : 'bg-white'} flex cursor-pointer items-center justify-center px-3 py-2`}
                 onClick={() => onClickCategory(category)}
+                key={category}
+                className="cursor-pointer"
               >
-                {category}
-                <span className="leading-2 ml-1 text-sm font-[100] !text-gray-500">
-                  ({count})
-                </span>
+                <Tag
+                  bgColor={
+                    filterCategory?.has(category)
+                      ? color
+                      : 'white'
+                  }
+                >
+                  {category}
+                  <span className="leading-2 ml-1 text-sm font-[100] !text-gray-500">
+                    ({count})
+                  </span>
+                </Tag>
               </div>
             )
           },

@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Indexing from './Indexing'
 import { PostMeta } from '@/types/postData.types'
+import Tag from './common/Tag'
 
 interface CardProps {
   post: PostMeta
@@ -43,7 +44,9 @@ export default function Card({
               categoryColor={categoryColor || 'transparent'}
             />
           ) : null}
-          <DateTag>{formatSmartDate(post.date)}</DateTag>
+          <DateTag>
+            <Tag size="s">{formatSmartDate(post.date)}</Tag>
+          </DateTag>
           <CardLabels
             title={post.title}
             isFocusing={isFocus}
@@ -90,14 +93,6 @@ const DateTag = styled.div`
   position: absolute;
   right: 10px;
   top: -8px;
-  rotate: 0deg;
-  display: flex;
-  width: max-content;
-  padding: 4px;
-  font-size: 0.75rem;
-  justify-content: center;
-  background-color: #fff;
-  border: #000 solid 1px;
 `
 
 const CardContent = styled.div`

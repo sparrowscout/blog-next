@@ -2,6 +2,7 @@
 import { getRandomNumber } from '@/utils/css-utils'
 import { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
+import Tag from './common/Tag'
 
 interface LabelsProps {
   title: string
@@ -32,18 +33,18 @@ export default function CardLabels({
   if (labelConfig)
     return (
       <CardTag
-        $categoryColor={labelConfig.categoryColor}
         $yPosition={labelConfig.yPosition}
         $rotation={labelConfig.rotation}
         $isFocusing={isFocusing}
       >
-        <CardTitle>{title}</CardTitle>
+        <Tag bgColor={labelConfig.categoryColor}>
+          <CardTitle>{title}</CardTitle>
+        </Tag>
       </CardTag>
     )
 }
 
 const CardTag = styled.div<{
-  $categoryColor: string
   $yPosition: number
   $rotation: number
   $isFocusing: boolean
@@ -55,17 +56,7 @@ const CardTag = styled.div<{
     `translateX(${$yPosition}%)`};
   transition: transform 0.2s ease;
   top: -12px;
-  min-width: 100px;
-  text-align: center;
-  padding: 16px;
-  background-color: ${(props) => props.$categoryColor};
   rotate: ${(props) => props.$rotation}deg;
-  border: 1px solid black;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
 
   ${({ $isFocusing }) =>
     $isFocusing &&
@@ -73,11 +64,6 @@ const CardTag = styled.div<{
       rotate: 0deg;
       transform: translateX(12px);
     `}
-
-  @media screen and (max-width: 760px) {
-    padding: 8px;
-    height: 33px;
-  }
 `
 
 const CardTitle = styled.span`

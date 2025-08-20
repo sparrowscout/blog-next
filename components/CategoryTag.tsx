@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Tag from './common/Tag'
 
 interface CategoryTagProps {
   categoryName: string
@@ -11,25 +12,18 @@ export default function CategoryTag({
 }: CategoryTagProps) {
   if (categoryName)
     return (
-      <CategoryTagContainer $categoryColor={categoryColor}>
-        {categoryName}
+      <CategoryTagContainer>
+        <Tag bgColor={`${categoryColor}` || 'transparent'}>
+          {categoryName}
+        </Tag>
       </CategoryTagContainer>
     )
 }
 
-const CategoryTagContainer = styled.div<{
-  $categoryColor: string
-}>`
-  background-color: ${({ $categoryColor }) =>
-    $categoryColor || 'transparent'};
-  padding: 4px;
-  display: inline-block;
+const CategoryTagContainer = styled.div`
   margin-right: 8px;
-  border: 1px solid black;
-  width: fit-content;
 
   &:hover {
-    opacity: 0.8;
     cursor: pointer;
   }
 `

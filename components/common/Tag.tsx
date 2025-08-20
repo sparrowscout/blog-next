@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 interface TagProps {
   children: ReactNode
+  style?: string
   size?: CardSize
   bgColor?: string
 }
@@ -11,11 +12,16 @@ export type CardSize = 's' | 'm' | 'l'
 
 export default function Tag({
   children,
+  style,
   size = 'm',
   bgColor = 'white',
 }: TagProps) {
   return (
-    <TagContainer $bgColor={bgColor} $size={size}>
+    <TagContainer
+      $bgColor={bgColor}
+      $size={size}
+      className={`${style}`}
+    >
       {children}
     </TagContainer>
   )

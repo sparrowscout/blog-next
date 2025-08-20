@@ -1,5 +1,6 @@
 import ExitIcon from '@/assets/icons/exit.svg'
 import TeaIcon from '@/assets/icons/cup_of_tea.svg'
+import LikeIcon from '@/assets/icons/like.svg'
 import { ReactElement, SVGProps } from 'react'
 import IconWrapper from './IconWrapper'
 
@@ -7,6 +8,7 @@ export enum NoticeText {
   SEARCH_RESULT_EMPTY = '해당하는 포스트가 없네요 ~',
   FILTER_RESULT_EMPTY = '카테고리 선택을 깜박하신 것 같아요!',
   IN_PROGRESS = '페이지 준비 중 입니다!',
+  CONTACT = '피드백 → 기쁘다',
 }
 
 const noticeIcon: Record<
@@ -14,8 +16,9 @@ const noticeIcon: Record<
   ReactElement<SVGProps<SVGSVGElement>>
 > = {
   [NoticeText.SEARCH_RESULT_EMPTY]: <ExitIcon />,
-  [NoticeText.FILTER_RESULT_EMPTY]: <ExitIcon />, // 필요시 추가
-  [NoticeText.IN_PROGRESS]: <TeaIcon />, // 필요시 추가
+  [NoticeText.FILTER_RESULT_EMPTY]: <ExitIcon />,
+  [NoticeText.IN_PROGRESS]: <TeaIcon />,
+  [NoticeText.CONTACT]: <LikeIcon />,
 }
 interface NoticeProps {
   noticeType: NoticeText

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Fuse, { FuseResult } from 'fuse.js'
 import BlogPost from './BlogPost'
 import { PostMeta } from '@/types/postData.types'
@@ -17,6 +17,7 @@ export default function SearchBox() {
   const [results, setResults] = useState<
     FuseResult<PostMeta>[]
   >([])
+  const inputRef = useRef<HTMLInputElement>(null)
   const isScrollbarOverlay = useIsIOSChrome()
 
   useEffect(() => {
@@ -44,6 +45,15 @@ export default function SearchBox() {
     [docs],
   )
 
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      inputRef.current?.blur()
+    }
+  }
+
   useEffect(() => {
     if (!q) return setResults([])
     setResults(fuse.search(q))
@@ -61,7 +71,9 @@ export default function SearchBox() {
             id="search input"
             value={q}
             onChange={(e) => setQ(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder="검색어를 입력해주세요 ~"
+            ref={inputRef}
             autoFocus
           />
           {q && (

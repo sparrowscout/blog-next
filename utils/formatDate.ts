@@ -1,4 +1,3 @@
-// utils/formatDate.ts
 import {
   format,
   formatDistanceToNow,
@@ -18,10 +17,10 @@ export function formatSmartDate(dateStr: string): string {
     return formatDistanceToNow(date, {
       addSuffix: true,
       locale: ko,
-    }) // 1일 전, 2일 전 ...
+    })
   }
 
-  if (daysDiff < 28) {
+  if (monthsDiff < 1) {
     const weeks = Math.floor(daysDiff / 7)
     return `${weeks}주 전`
   }

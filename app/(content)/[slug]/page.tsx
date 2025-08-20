@@ -43,7 +43,7 @@ export default async function PostPage({
   })
 
   return (
-    <ClientScrollContainer className="h-dvh  select-text overflow-scroll px-3 pb-36 pt-24">
+    <ClientScrollContainer className="h-dvh select-text overflow-scroll px-3 pb-36 pt-32 !leading-relaxed">
       <article className="m-auto box-border max-w-[1280px] border-[1px] border-gray-900 bg-white p-4">
         <h1>
           {String(

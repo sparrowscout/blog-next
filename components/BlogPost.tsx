@@ -27,7 +27,7 @@ export default function BlogPost({ post }: BlogPostProps) {
       key={post.slug}
     >
       <div className="flex flex-col gap-2 border-[1px] border-black bg-white p-5 hover:[&_div]:!text-[#ff01ff] active:[&_div]:!text-[#ff01ff]">
-        <div className="flex items-center justify-between">
+        <div className="flex items-start justify-between">
           <div className="text-lg">{post.title}</div>
           <Tag size="s">{formatSmartDate(post.date)}</Tag>
         </div>

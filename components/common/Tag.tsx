@@ -1,3 +1,5 @@
+'use client'
+
 import { ReactNode } from 'react'
 import styled from 'styled-components'
 
@@ -31,6 +33,7 @@ const TagContainer = styled.div<{
   $bgColor: string
   $size: CardSize
 }>`
+  height: fit-content;
   background-color: ${({ $bgColor }) => `${$bgColor}`};
   padding-inline: ${({ $size }) =>
     $size === 's'

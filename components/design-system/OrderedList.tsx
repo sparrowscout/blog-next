@@ -39,7 +39,6 @@ const OrderedList = styled.ol`
       left: 0; // li 기준으로 왼쪽 정렬
       top: 0;
       color: #959396;
-      font-size: 0.875rem;
     }
   }
 `

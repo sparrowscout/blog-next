@@ -21,7 +21,6 @@ export default function ListItemComponent({
 
 const ListItem = styled.li`
   ::before {
-    font-size: 0.875rem !important;
     position: absolute;
     left: -1.6em;
     color: #959396;

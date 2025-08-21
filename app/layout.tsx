@@ -7,7 +7,6 @@ import UrlSelectSync from '@/components/common/UrlSelectSync'
 
 const geistSans = Noto_Sans_KR({
   subsets: ['latin'],
-  weight: '500',
 })
 
 export const metadata: Metadata = {
